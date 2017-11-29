@@ -15,9 +15,9 @@ private:
         const SingleSub m;
         const SingleSub n;
 
-        QWave _Wave;
+        
 public:
-
+        QWave _Wave;
 
         int rows() { return Dim; };
         int cols() { return Dim; };

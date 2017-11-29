@@ -1,35 +1,32 @@
 #include "SuperEnergy.h"
 #include "SingleSub.h"
 #include <ctime>
-
 void test(Parameter& para);
+void SaveTruncM(const MatrixXd& A, const int& logo);
+void ReadTruncM(MatrixXd& A, const int& logo);
 
 void test(Parameter& para)
 {
+        SingleSub m(para);
+        Sub Sys(para, 1);
+
+        Super Sup(para, Sys, Sys);
+        MatrixXd IniWave(MatrixXd::Random(100, 100));
+        SaveTruncM(IniWave, 1003);
+
+        vector<double> f;
+        for(int i=0; i<100; ++i)
+        {
+            for(int j=0; j<100; ++j)f.push_back(IniWave(i,j));
+        }
+        Sup._Wave.f2Wave(f);
+
+        Sup.OneIteration();
+
         
-        MatrixXd System(MatrixXd::Random(1000, 1000));
+        SaveTruncM(Sup.Wave().Wave(), 1001);
 
-        SingleSub m(para), n(para);
-
-        //Sys.Read(11);Env.Read(14);
-
-        QWave wave1(1000, m.System().rows(),
-         n.System().rows(), 1000);
-
-        //QWave wave2(wave1);
-
-        time_t start, end;
-        time(&start);
-        wave1.EnvOPWave(System);//cout<<wave1.Wave()(437,500)<<endl;
-        time(&end);cout<<end-start<<endl;
-
-        time(&start);
-        wave1.MOPWave(m.System());//cout<<wave1.Wave()(437,500)<<endl;
-        time(&end);cout<<end-start<<endl;
-
-        time(&start);
-        wave1.NOPWave(n.System());//cout<<wave1.Wave()(437,500)<<endl;
-        time(&end);cout<<end-start<<endl;
+        
         
 
 }

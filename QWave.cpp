@@ -173,6 +173,26 @@ void QWave::MOPWave(const SpMat& O)
         Wave2M(temp);
         temp=O*temp;
         M2Wave(temp);
+        /*MatrixXd temp(_Wave);
+        for(int is=0; is<DSys; ++is)
+        {
+                for(int ie=0; ie<DEnv; ++ie)
+                {
+                        for (int k=0; k<O.outerSize(); ++k)
+                        for (SparseMatrix<double>::InnerIterator it(O,k); it; ++it)
+                        {
+        
+                                for(int in=0; in<Dn; ++in)
+                                _Wave(is*Dm+it.row(), ie*Dn+in)
+                                =it.value()*temp(is*Dm+it.col(), ie*Dn+in);
+                        } 
+                }
+        }*/
+                
+
+
+
+
 }
 void QWave::NOPWave(const SpMat& O)
 {
@@ -299,6 +319,7 @@ const MatrixXd& QWave::TruncL(MatrixXd& truncU, const int& D)const
 
         if(_Wave.cols()*_Wave.rows()>16)
         {
+                //cout<<"haha"<<endl;
                 BDCSVD<MatrixXd> svd(_Wave, ComputeFullU);
                 for(int i=0; i<svd.singularValues().rows(); ++i)
                 {
@@ -310,6 +331,8 @@ const MatrixXd& QWave::TruncL(MatrixXd& truncU, const int& D)const
                 }
         }else
         {
+                //cout<<"hehe"<<endl;
+
                 JacobiSVD<MatrixXd> svd(_Wave, ComputeFullU);
                 for(int i=0; i<svd.singularValues().rows(); ++i)
                 {

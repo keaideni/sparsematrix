@@ -11,7 +11,7 @@ void Sub::MatrixSave(const MatrixXd& A, ofstream& outfile)const
 {
         outfile<<A.rows()<<endl
         <<A.cols()<<endl;
-        outfile.precision(15);
+        outfile.precision(20);
         outfile<<A<<endl;
 }
 

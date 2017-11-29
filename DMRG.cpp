@@ -14,7 +14,7 @@ void SaveTruncM(const MatrixXd& A, const int& logo)
 
         ofstream outfile(filename);
         outfile<<A.rows()<<endl<<A.cols()<<endl;
-        outfile.precision(15);
+        outfile.precision(20);
         outfile<<A<<endl;
         
         outfile.close();
@@ -144,7 +144,7 @@ void DMRG::Sweep(Parameter& para, int& OS, int& OE)
         bool stop(false);
         
 
-        while(!stop)
+        while(SweepNo<5)
         {
                 Sys.Read(OS);Env.Read(OE);m.ChangeOrbital(OS+dir); n.ChangeOrbital(OE+dir);
                 

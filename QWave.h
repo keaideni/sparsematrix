@@ -41,6 +41,11 @@ public:
         _Wave(MatrixXd::Zero(sys*m, env*n))
         {};
 
+        void Mat2Wave(const MatrixXd& A)
+        {
+                _Wave=A;
+        }
+
 //=================================================================================
 
         //void SysOPWave(const MatrixXd&);
